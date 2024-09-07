@@ -1,7 +1,6 @@
 #! /usr/local/bin/python3
 import sys
-from src.http_api_request import get_activities
-from src.process_json import get_data_as_list
+from src.http_api_request import get_activities, get_data_as_list
 
 def main():
     arguments = sys.argv
@@ -10,14 +9,12 @@ def main():
         username = arguments[1]
         # ! Calling the api
         result = get_activities(username)
-        # ! Formating the result
-        listed = get_data_as_list(result)
         # ! Printing the results
         last_event = None
         last_repo = None
         amount = 0
         # ! Going through the list
-        for l in listed:
+        for l in result:
             # ! Getting the event and the repo
             event_type = l['type']
             repo = l['repo']['name']
@@ -26,13 +23,13 @@ def main():
                 amount = amount + 1
             else:
                 # ! Printing the event and the amount of it
-                print(f'{last_event} - {amount} to {last_repo}')
+                print(f' - {last_event} - {amount} to {last_repo}')
                 amount = 1
             # ! Saving the last events and repo's names
             last_event = event_type
             last_repo = repo
         # ! Printing the last one
-        print(f'{last_event} - {amount} to {last_repo}')
+        print(f' - {last_event} - {amount} to {last_repo}')
 
 if __name__ == '__main__':
     main()
