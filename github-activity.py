@@ -1,4 +1,4 @@
-#! /usr/local/bin/python3
+#! /Users/kael/.local/share/virtualenvs/Github-Activity-YqJKdP7W/bin/python
 import sys
 from src.http_api_request import get_activities, get_data_as_list
 
